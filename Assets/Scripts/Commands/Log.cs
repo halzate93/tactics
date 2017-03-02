@@ -1,17 +1,18 @@
-using System;
 using UnityEngine;
 
 public class Log : Command
 {
+    public Log(Character character) : base(character)
+    {
+    }
+
     public override int Cost
     {
         get
         {
-            return 1;
+            return 0;
         }
     }
-
-    public event Action OnCompleted;
 
     public override void Execute()
     {

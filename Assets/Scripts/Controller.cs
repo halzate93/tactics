@@ -5,7 +5,7 @@ using UnityEngine;
 public class Controller: MonoBehaviour
 {
     [SerializeField]
-    private int actionPoints = 100;
+    private int actionPoints = 10;
     private bool isExecuting;
     public int CurrentActionPoints
     {
