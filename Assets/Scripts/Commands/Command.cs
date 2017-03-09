@@ -13,7 +13,7 @@ public abstract class Command
 
     public abstract void Execute ();
     
-    public void OnFinished ()
+    protected void OnFinished ()
     {
          if (OnCompleted!=null)
             OnCompleted ();

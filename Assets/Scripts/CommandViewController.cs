@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Structures
@@ -19,7 +18,7 @@ namespace Structures
 
 		private void Start ()
 		{
-			options.SetOptions<ActionType>();
+			options.SetOptions<ActionType> ();
 			addAction.onClick.AddListener (AddSelectedAction);
 		}
 
@@ -42,7 +41,7 @@ namespace Structures
 				case ActionType.Move:
 					AddMove ();
 					break;
-				case ActionType.Slash:
+				case ActionType.Shoot:
 					AddSlash ();
 					break;
 				case ActionType.Explode:
@@ -56,14 +55,15 @@ namespace Structures
         private void AddSlash()
         {
             Vector3 direction = GetCurrentDirection ();
-			TryAddAction (new Slash (character, direction));
+			TryAddAction (new Shoot (character, direction));
         }
 
         private Vector3 GetCurrentDirection()
         {
-			Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
-            Vector2 direction = (Vector2)Input.mousePosition - center;
-			return new Vector3 (direction.x, 0f, direction.y).normalized;
+			Vector3 position = GetCurrentPosition ();
+			Vector3 distance = position - character.transform.position;
+			distance.y = 0f;
+			return distance.normalized;
         }
 
         private void AddMove()

@@ -2,6 +2,6 @@ public enum ActionType
 {
     Log,
     Move,
-    Slash,
+    Shoot,
     Explode
 }

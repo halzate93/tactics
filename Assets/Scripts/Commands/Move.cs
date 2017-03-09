@@ -19,7 +19,6 @@ public class Move : Command
 
     public override void Execute()
     {
-        character.Move (position);
-		OnFinished ();
+        character.Move (position, OnFinished);
     }
 }

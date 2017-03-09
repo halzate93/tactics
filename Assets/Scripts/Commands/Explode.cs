@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Explode : Command 
+﻿public class Explode : Command 
 {
     public Explode(Character character) : base(character)
     {
@@ -19,7 +14,6 @@ public class Explode : Command
 
     public override void Execute()
     {
-		character.Explode ();
-		OnFinished ();
+		character.Explode (OnFinished);
     }
 }
