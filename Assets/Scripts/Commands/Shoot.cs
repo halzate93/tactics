@@ -4,7 +4,7 @@ public class Shoot: Command
 {
 	private Vector3 direction;
 
-    public Shoot(Character character, Vector3 direction) : base(character)
+    public Shoot(Vector3 direction)
     {
 		this.direction = direction;
     }
@@ -17,7 +17,7 @@ public class Shoot: Command
         }
     }
 
-    public override void Execute()
+    public override void Execute(Character character)
     {
         character.Shoot (direction, OnFinished);
     }

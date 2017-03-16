@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class Log : Command
 {
-    public Log(Character character) : base(character)
-    {
-    }
-
     public override int Cost
     {
         get
@@ -14,7 +10,7 @@ public class Log : Command
         }
     }
 
-    public override void Execute()
+    public override void Execute(Character character)
     {
         Debug.Log ("Executed");
         OnFinished ();

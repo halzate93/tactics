@@ -1,7 +1,8 @@
 public enum ActionType
 {
-    Log,
-    Move,
-    Shoot,
-    Explode
+    None = 0,
+    Log = 1,
+    Move = 2,
+    Shoot = 3,
+    Explode = 4,
 }

@@ -7,16 +7,18 @@ public class Controller: MonoBehaviour
     [SerializeField]
     private int actionPoints = 10;
     private bool isExecuting;
+    private Queue<Command> actions;
+    private Character character;
     public int CurrentActionPoints
     {
         get; private set; 
     }
 
-    private Queue<Command> actions;
 
     private void Awake ()
     {
         actions = new Queue<Command> ();
+        character = GetComponent<Character> ();
     }
 
     private void Start ()
@@ -51,7 +53,7 @@ public class Controller: MonoBehaviour
         }
         Command next = actions.Dequeue ();
         next.OnCompleted += ExecuteNextAction;
-        next.Execute ();
+        next.Execute (character);
     }
 
     private void Reset ()

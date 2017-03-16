@@ -1,9 +1,5 @@
 ﻿public class Explode : Command 
 {
-    public Explode(Character character) : base(character)
-    {
-    }
-
     public override int Cost
     {
         get
@@ -12,7 +8,7 @@
         }
     }
 
-    public override void Execute()
+    public override void Execute(Character character)
     {
 		character.Explode (OnFinished);
     }

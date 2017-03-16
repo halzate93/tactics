@@ -4,7 +4,7 @@ public class Move : Command
 {
 	private Vector3 position;
 
-    public Move(Character character, Vector3 position) : base(character)
+    public Move(Vector3 position)
     {
 		this.position = position;
     }
@@ -17,7 +17,7 @@ public class Move : Command
         }
     }
 
-    public override void Execute()
+    public override void Execute(Character character)
     {
         character.Move (position, OnFinished);
     }
