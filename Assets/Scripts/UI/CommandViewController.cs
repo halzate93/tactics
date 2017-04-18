@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CommandViewController : MonoBehaviour 
@@ -10,8 +9,26 @@ public class CommandViewController : MonoBehaviour
 	private Character character;
 	[SerializeField]
 	private LayerMask terrain;
+	[SerializeField]
+	private PreviewAgent preview;
 	private UIStateBase current;
     private Dictionary<ActionType, UIStateBase> states;
+
+	public PreviewAgent Preview
+	{
+		get
+		{
+			return preview;
+		}
+	}
+
+	public int RemainingActionPoints
+	{
+		get
+		{
+			return controller.RemainingActionPoints;
+		}
+	}
 
 	private void Awake ()
 	{
@@ -22,6 +39,8 @@ public class CommandViewController : MonoBehaviour
 	{
 		SetState (ActionType.None);
 		states.Add (ActionType.Move, new MoveUIState (this));
+		SyncPreview ();
+		controller.OnFinished += SyncPreview;
 	}	
 
 	private void Update ()
@@ -48,6 +67,12 @@ public class CommandViewController : MonoBehaviour
 		return wasAdded;
 	}
 
+	public void RunActions ()
+	{
+		current = null;
+		controller.ExecuteActions ();
+	}
+
 	private Vector3 GetCurrentDirection()
 	{
 		Vector3 position = GetCurrentPosition ();
@@ -62,5 +87,10 @@ public class CommandViewController : MonoBehaviour
 		RaycastHit hit;
 		bool didHit = Physics.Raycast (ray, out hit);
 		return didHit? hit.point : character.transform.position; 
+	}
+
+	private void SyncPreview ()
+	{
+		Preview.Sync (character);
 	}
 }

@@ -1,15 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent (typeof (Character))]
 public class Controller: MonoBehaviour
 {
+    public event Action OnFinished;
+
     [SerializeField]
     private int actionPoints = 10;
     private bool isExecuting;
     private Queue<Command> actions;
     private Character character;
-    public int CurrentActionPoints
+    public int RemainingActionPoints
     {
         get; private set; 
     }
@@ -34,10 +37,10 @@ public class Controller: MonoBehaviour
 
     public bool TryAddAction (Command action)
     {
-        if (!isExecuting && CurrentActionPoints >= action.Cost)
+        if (!isExecuting && RemainingActionPoints >= action.Cost)
         {
             actions.Enqueue (action);
-            CurrentActionPoints -= action.Cost;
+            RemainingActionPoints -= action.Cost;
             return true;
         }
         else
@@ -59,6 +62,8 @@ public class Controller: MonoBehaviour
     private void Reset ()
     {
         isExecuting = false;
-        CurrentActionPoints = actionPoints;
+        RemainingActionPoints = actionPoints;
+        if (OnFinished != null)
+            OnFinished ();
     }
 }
